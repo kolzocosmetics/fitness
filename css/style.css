@@ -371,6 +371,93 @@ section {
     z-index: 1;
 }
 
+.visible-testimonials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.hidden-testimonials {
+    display: none;
+    margin-top: 30px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.testimonial-toggle, .show-less-container {
+    text-align: center;
+    margin-top: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.show-less-container {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.testimonial-button {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer !important;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    width: 280px;
+    position: relative;
+    margin: 0 auto;
+    pointer-events: auto !important;
+}
+
+.testimonial-button:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+}
+
+.button-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-left: 15px;
+}
+
+.button-arrow i {
+    color: var(--text-color);
+}
+
+.testimonial-button:hover .button-arrow {
+    background-color: var(--text-color);
+}
+
+.testimonial-button:hover .button-arrow i {
+    color: var(--accent-color);
+}
+}
+
+#show-more-testimonials span {
+    margin-right: 10px;
+}
+
+#show-more-testimonials:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
 .testimonial-card {
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
@@ -378,6 +465,9 @@ section {
     box-shadow: var(--box-shadow);
     transition: var(--transition);
     border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .testimonial-card:hover {
@@ -403,6 +493,9 @@ section {
 
 .testimonial-content {
     padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .testimonial-text {
@@ -411,6 +504,7 @@ section {
     position: relative;
     padding-left: 20px;
     border-left: 3px solid var(--accent-color);
+    flex-grow: 1;
 }
 
 .client-name {
@@ -421,6 +515,7 @@ section {
 
 .client-stats {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     font-size: 0.9rem;
     color: var(--text-secondary);
@@ -433,21 +528,48 @@ section {
 
 /* CTA Section */
 .cta-section {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     text-align: center;
     position: relative;
     overflow: hidden;
+    z-index: 1;
+    padding: 60px 0;
+    background: linear-gradient(90deg, 
+        rgba(255, 102, 0, 0.15) 0%, 
+        rgba(0, 0, 0, 0) 20%, 
+        rgba(0, 0, 0, 0) 80%, 
+        rgba(255, 102, 0, 0.15) 100%
+    );
 }
 
-.cta-section::before {
+.cta-section .container {
+    max-width: 800px;
+}
+
+.cta-section h2 {
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    margin-bottom: 30px;
+}
+
+.cta-section .cta-button {
+    font-size: 1.1rem;
+    padding: 18px 40px;
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3);
+}
+
+.cta-section::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 102, 0, 0.05), transparent 70%);
-    z-index: 0;
+    background: radial-gradient(circle at bottom right, var(--accent-color) 0%, transparent 60%);
+    z-index: -1;
+    opacity: 0.7;
 }
 
 .cta-section .container {
