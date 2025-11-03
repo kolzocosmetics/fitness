@@ -4,15 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
     
     hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        hamburger.classList.toggle('toggle');
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
     });
     
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-links li a').forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.classList.remove('nav-active');
-            hamburger.classList.remove('toggle');
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
         });
     });
     

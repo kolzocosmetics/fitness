@@ -628,19 +628,29 @@ footer p {
         font-size: 2rem;
     }
     
-    .hero .container {
+    .hero-section .container {
         flex-direction: column;
+        text-align: center;
     }
     
     .hero-content, .hero-image {
         width: 100%;
+        max-width: 100%;
     }
     
     .hero-image {
         margin-top: 40px;
     }
     
-    .about .container {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .about-section .container {
         flex-direction: column;
     }
     
@@ -682,6 +692,8 @@ footer p {
     
     .hamburger {
         display: block;
+        z-index: 1001; /* Ensure hamburger is above other elements */
+        pointer-events: auto; /* Ensure hamburger is clickable */
     }
     
     .nav-links {
@@ -695,6 +707,8 @@ footer p {
         padding: 30px 0;
         transition: var(--transition);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1001; /* Ensure nav-links are above other elements */
+        pointer-events: auto; /* Ensure nav-links are clickable */
     }
     
     .nav-links.active {
@@ -720,5 +734,43 @@ footer p {
     .cta-button {
         padding: 12px 25px;
         font-size: 1rem;
+    }
+
+    .service-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .service-card {
+        width: 100%;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .cta-section p {
+        font-size: 0.9rem;
+    }
+
+    .cta-section .cta-button {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+    footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer p {
+        margin-bottom: 15px;
+    }
+
+    .social-links a {
+        margin: 0 10px;
     }
 }
