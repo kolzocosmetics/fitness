@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hiddenTestimonials.parentNode.insertBefore(showLessContainer, hiddenTestimonials.nextSibling);
         
         // Initialize the hidden testimonials to be hidden
-        hiddenTestimonials.style.display = 'none';
+        hiddenTestimonials.classList.remove('active');
         showLessContainer.style.display = 'none';
         
         // Add click event to the entire button area
@@ -94,9 +94,9 @@ document.addEventListener('DOMContentLoaded', function() {
         showMoreBtn.onclick = function(e) {
             e.preventDefault();
             
-            if (hiddenTestimonials.style.display === 'none') {
+            if (!hiddenTestimonials.classList.contains('active')) {
                 // Show hidden testimonials with animation
-                hiddenTestimonials.style.display = 'grid';
+                hiddenTestimonials.classList.add('active');
                 showLessContainer.style.display = 'block';
                 showMoreBtn.parentElement.style.display = 'none';
                 
@@ -107,13 +107,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     card.classList.add('fade-in');
                 });
                 
-                // Smooth scroll to first hidden testimonial
-                setTimeout(() => {
-                    hiddenTestimonials.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }, 100);
+                // Smooth scroll to first hidden testimonial (optional, adjust as needed)
+                // setTimeout(() => {
+                //     hiddenTestimonials.scrollIntoView({
+                //         behavior: 'smooth',
+                //         block: 'start'
+                //     });
+                // }, 100);
             }
         };
         
@@ -125,15 +125,24 @@ document.addEventListener('DOMContentLoaded', function() {
         showLessBtn.onclick = function(e) {
             e.preventDefault();
             
-            hiddenTestimonials.style.display = 'none';
+            hiddenTestimonials.classList.remove('active');
             showLessContainer.style.display = 'none';
             showMoreBtn.parentElement.style.display = 'block';
             
-            // Smooth scroll back to testimonials section
-            document.querySelector('#testimonials').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            // Smooth scroll back to testimonial 3
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            if (testimonialCards.length >= 3) {
+                testimonialCards[2].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            } else {
+                // Fallback to testimonials section if less than 3 testimonials
+                document.querySelector('#testimonials').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         };
         
         // Make sure the button is clickable

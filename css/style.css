@@ -9,7 +9,7 @@
     --section-padding: 100px 0;
     --border-radius: 10px;
     --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    --transition: all 0.3s ease;
+    --transition: all 0.5s ease-in-out;
 }
 
 * {
@@ -378,9 +378,19 @@ section {
 }
 
 .hidden-testimonials {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out;
     margin-top: 30px;
-    animation: fadeIn 0.8s ease-in-out;
+    display: grid; /* Keep display grid for layout when visible */
+    grid-template-columns: repeat(3, 1fr); /* Ensure grid layout is maintained */
+    gap: 30px; /* Maintain gap */
+}
+
+.hidden-testimonials.active {
+    max-height: 5000px; /* Adjusted to show all testimonials */
+    opacity: 1;
 }
 
 .testimonial-toggle, .show-less-container {
