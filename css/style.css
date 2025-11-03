@@ -9,7 +9,7 @@
     --section-padding: 100px 0;
     --border-radius: 10px;
     --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    --transition: all 0.5s ease-in-out;
+    --transition: all 0.3s ease-in-out;
 }
 
 * {
@@ -381,7 +381,7 @@ section {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out;
+    transition: max-height var(--transition), opacity var(--transition);
     margin-top: 30px;
     display: grid; /* Keep display grid for layout when visible */
     grid-template-columns: repeat(3, 1fr); /* Ensure grid layout is maintained */
@@ -647,6 +647,11 @@ footer p {
         width: 100%;
         max-width: 100%;
     }
+
+    .hero-content {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
     
     .hero-image {
         margin-top: 40px;
@@ -708,21 +713,25 @@ footer p {
     
     .nav-links {
         position: fixed;
-        top: -100%;
+        top: 80px; /* Adjust based on your header height */
         left: 0;
         width: 100%;
         background-color: var(--primary-bg);
         flex-direction: column;
         align-items: center;
         padding: 30px 0;
-        transition: var(--transition);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        z-index: 1001; /* Ensure nav-links are above other elements */
-        pointer-events: auto; /* Ensure nav-links are clickable */
+        z-index: 1001;
+        pointer-events: none; /* Initially not clickable */
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: opacity var(--transition), transform var(--transition);
     }
     
     .nav-links.active {
-        top: 80px;
+        pointer-events: auto; /* Make clickable when active */
+        opacity: 1;
+        transform: translateY(0);
     }
     
     .nav-links li {
