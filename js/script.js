@@ -17,13 +17,13 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 // Sticky Navigation
 window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
+    const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
         navbar.style.padding = '15px 0';
-        navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
+        navbar.style.backgroundColor = 'rgba(17, 17, 17, 0.98)';
     } else {
         navbar.style.padding = '20px 0';
-        navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+        navbar.style.backgroundColor = 'rgba(17, 17, 17, 0.95)';
     }
 });
 
@@ -37,7 +37,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            const navbarHeight = document.getElementById('navbar').offsetHeight;
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
             
             window.scrollTo({
@@ -48,8 +48,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Service Card Click Effect
+document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', function() {
+        // Remove active class from all cards
+        document.querySelectorAll('.service-card').forEach(c => {
+            c.classList.remove('active');
+        });
+        
+        // Add active class to clicked card
+        this.classList.add('active');
+    });
+});
+
+// Testimonial Animation
+const testimonialCards = document.querySelectorAll('.testimonial-card');
+testimonialCards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.2}s`;
+});
+
 // Animation on scroll (simple reveal effect)
-const revealElements = document.querySelectorAll('.offer-card, .transformation, .about-content, .about-image');
+const revealElements = document.querySelectorAll('.service-card, .testimonial-card, .about-content, .about-image');
 
 function checkReveal() {
     const triggerBottom = window.innerHeight * 0.8;
@@ -58,19 +77,24 @@ function checkReveal() {
         const elementTop = element.getBoundingClientRect().top;
         
         if (elementTop < triggerBottom) {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
+            element.classList.add('revealed');
         }
     });
 }
 
 // Set initial styles for animation
-revealElements.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(30px)';
-    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+document.addEventListener('DOMContentLoaded', function() {
+    // Preload images for smoother experience
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        const src = img.getAttribute('src');
+        if (src) {
+            const newImg = new Image();
+            newImg.src = src;
+        }
+    });
+    
+    // Check for elements in view on load and scroll
+    window.addEventListener('scroll', checkReveal);
+    checkReveal(); // Check on initial load
 });
-
-// Check for elements in view on load and scroll
-window.addEventListener('load', checkReveal);
-window.addEventListener('scroll', checkReveal);
